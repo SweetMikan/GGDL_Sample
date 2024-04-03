@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<robot name="limb_link10cm">
+  <!-- FOR CONVENTIONAL URDF DESCRIPTION -->
+  <link name="base_link"/>
+  <joint name="body_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="CR(id)"/>
+  </joint>
+
+  <!-- Module structure description -->
+  <!-- Each link and joint must have "(id)" in the name-->
+  <!-- PYTHON_READ_START -->
+
+  <!-- Rear connector -->
+  <link name="CR(id)">
+    <!-- Only visual, No collision -->
+    <visual>
+      <geometry>
+        <cylinder length="0.01" radius="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 2.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- body -->
+  <joint name="CR2BD(id)" type="fixed">
+    <parent link="CR(id)"/>
+    <child link="limb_link10cm_body(id)"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name="limb_link10cm_body(id)">
+    <visual>
+      <geometry>
+        <cylinder length="0.10" radius="0.03"/>
+      </geometry> 
+      <origin xyz="-0.05 0 0" rpy="0 1.5708 0"/>
+      <material name="limb_link_10cm_color">
+        <color rgba="0.0 0.5 1.0 2.0"/>
+      </material>
+    </visual>
+  </link>
+  
+  <!-- Front connector -->
+  <joint name="limb_link10cm_BD2CF(id)" type="fixed">
+    <parent link="limb_link10cm_body(id)"/>
+    <child link="CF(id)"/>
+    <origin xyz="-0.1 0 0" rpy="0 0 3.14159"/>
+  </joint>
+  <link name="CF(id)">
+    <!-- Only visual, No collision -->
+    <visual>
+      <geometry>
+        <cylinder length="0.01" radius="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 2.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- PYTHON_READ_END -->
+  
+</robot>

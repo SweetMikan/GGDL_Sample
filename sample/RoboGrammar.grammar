@@ -1,0 +1,171 @@
+<grammar>
+  <start-symbol name="S"/>
+
+  <terminal-symbol>
+    <symbol name="body_link"/>
+    <symbol name="limb_link10cm"/>
+    <symbol name="limb_link15cm"/>
+    <symbol name="body_rigid_joint"/>
+    <symbol name="body_roll_joint"/>
+    <symbol name="body_twist_joint"/>
+    <symbol name="limb_rigid_joint"/>
+    <symbol name="limb_roll_joint"/>
+    <symbol name="limb_twist_joint"/>
+    <symbol name="limb_knee_joint"/>
+    <symbol name="limb_elbow_joint"/>
+    <symbol name="limb_knee_joint"/>
+    <symbol name="connector"/>
+    <symbol name="mount_link"/>
+    <symbol name="wheel"/>
+    <symbol name="empty"/>
+  </terminal-symbol>
+
+  <non-terminal-symbol>
+    <symbol name="S"/>
+    <symbol name="H"/>
+    <symbol name="Y"/>
+    <symbol name="B"/>
+    <symbol name="T"/>
+    <symbol name="U"/>
+    <symbol name="E"/>
+    <symbol name="J"/>
+    <symbol name="L"/>
+    <symbol name="C"/>
+    <symbol name="M"/>
+  </non-terminal-symbol>
+  
+  <production-rule>
+    <!-- Structual rules -->
+    <rule name="r1">
+      <nt name="S"/>
+      <graph base="B">
+        <node name="H" id="0"/>
+        <node name="T" id="1"/>
+        <edge id="0" from="base" to="0"/>
+        <edge id="1" from="1" to="base"/>
+      </graph>
+    </rule>
+    <rule name="r2">
+      <nt name="T"/>
+      <graph base="Y">
+        <node name="B" id="0"/>
+        <node name="T" id="1"/>
+        <edge id="0" from="1" to="0"/>
+        <edge id="1" from="0" to="base"/>
+      </graph>
+    </rule>
+    <rule name="r3">
+      <nt name="B"/>
+      <graph base="U">
+        <node name="C" id="0"/>
+        <node name="C" id="1"/>
+        <node name="M" id="2"/>
+        <node name="E" id="3"/>
+        <edge id="0" from="base" to="0"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="0" to="2"/>
+        <edge id="3" from="1" to="2"/>
+        <edge id="4" from="2" to="3"/>
+      </graph>
+    </rule>
+    <rule name="r4">
+      <nt name="B"/>
+      <graph base="U"/>
+    </rule>
+    <rule name="r5">
+      <nt name="E"/>
+      <graph base="J">
+        <node name="L" id="0"/>
+        <node name="E" id="1"/>
+        <edge id="0" from="base" to="0"/>
+        <edge id="1" from="0" to="1"/>
+      </graph>
+    </rule>
+    <rule name="r6">
+      <nt name="T"/>
+      <graph base="C">
+        <node name="M" id="0"/>
+        <node name="E" id="1"/>
+        <edge id="0" from="base" to="0"/>
+        <edge id="1" from="0" to="1"/>
+      </graph>
+    </rule>
+    <rule name="r7">
+      <nt name="H"/>
+      <graph base="C">
+        <node name="M" id="0"/>
+        <node name="E" id="1"/>
+        <edge id="0" from="base" to="0"/>
+        <edge id="1" from="0" to="1"/>
+      </graph>
+    </rule>
+    <!-- Component-based rules -->
+    <rule name="r8">
+      <nt name="U"/>
+      <graph base="body_link"/>
+    </rule>
+    <rule name="r9">
+      <nt name="L"/>
+      <graph base="limb_link15cm"/>
+    </rule>
+    <rule name="r10">
+      <nt name="L"/>
+      <graph base="limb_link15cm"/>
+    </rule>
+    <rule name="r11">
+      <nt name="Y"/>
+      <graph base="body_rigid_joint"/>
+    </rule>
+    <rule name="r12">
+      <nt name="Y"/>
+      <graph base="body_roll_joint"/>
+    </rule>
+    <rule name="r13">
+      <nt name="Y"/>
+      <graph base="body_twist_joint"/>
+    </rule>
+    <rule name="r14">
+      <nt name="J"/>
+      <graph base="limb_rigid_joint"/>
+    </rule>
+    <rule name="r15">
+      <nt name="J"/>
+      <graph base="limb_roll_joint"/>
+    </rule>
+    <rule name="r16">
+      <nt name="J"/>
+      <graph base="limb_knee_joint"/>
+    </rule>
+    <rule name="r17">
+      <nt name="J"/>
+      <graph base="limb_elbow_joint"/>
+    </rule>
+    <rule name="r18">
+      <nt name="C"/>
+      <graph base="connector"/>
+    </rule>
+    <rule name="r19">
+      <nt name="M"/>
+      <graph base="mount_link"/>
+    </rule>
+    <rule name="r20">
+      <nt name="E"/>
+      <graph base="wheel"/>
+    </rule>
+    <rule name="r21">
+      <nt name="E"/>
+      <graph base="empty"/>
+    </rule>
+    <rule name="r22">
+      <nt name="H"/>
+      <graph base="empty"/>
+    </rule>
+    <rule name="r23">
+      <nt name="T"/>
+      <graph base="empty"/>
+    </rule>
+  </production-rule>
+</grammar>
+
+
+

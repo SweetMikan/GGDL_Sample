@@ -1,0 +1,823 @@
+<grammar>
+  <start-symbol/>
+
+  <terminal-symbol>
+    <symbol name="CF(id)"/>
+    <symbol name="CRi(id)"/>
+    <symbol name="CL(id)"/>
+    <symbol name="CR(id)"/>
+
+    <symbol name="body_link.urdf"/>
+    <symbol name="body_rigid_joint.urdf"/>
+    <symbol name="body_roll_joint.urdf"/>
+    <symbol name="body_twist_joint.urdf"/>
+
+
+    <symbol name="limb_link10cm.urdf"/>
+    <symbol name="limb_link15cm.urdf"/>
+    <symbol name="limb_rigid_joint.urdf"/>
+    <symbol name="limb_roll_joint.urdf"/>
+    <symbol name="limb_twist_joint.urdf"/>
+    <symbol name="limb_knee_joint.urdf"/>
+    <symbol name="limb_elbow_joint.urdf"/>
+
+    <symbol name="mount_link.urdf"/>
+    <symbol name="connector_link.urdf"/>
+    <symbol name="wheel.urdf"/>
+    <symbol name="empty_edge.urdf"/>
+
+    <symbol name="inverted_wheel.urdf"/>
+    <symbol name="inverted_wheel_tyre(id)"/>
+
+    <symbol name="inverted_empty_edge.urdf"/>
+    <symbol name="inverted_empty_edge_ball(id)"/>
+  </terminal-symbol>
+
+  <non-terminal-symbol>
+    <symbol name="body_link"/>
+    <symbol name="limb_link10cm"/>
+    <symbol name="limb_link15cm"/>
+    <symbol name="body_rigid_joint"/>
+    <symbol name="body_roll_joint"/>
+    <symbol name="body_twist_joint"/>
+    <symbol name="limb_rigid_joint"/>
+    <symbol name="limb_roll_joint"/>
+    <symbol name="limb_twist_joint"/>
+    <symbol name="limb_knee_joint"/>
+    <symbol name="limb_elbow_joint"/>
+    <symbol name="limb_knee_joint"/>
+    <symbol name="connector"/>
+    <symbol name="mount_link"/>
+    <symbol name="wheel"/>
+    <symbol name="empty"/>
+  </non-terminal-symbol>
+
+  <production-rule>
+    <rule name="body_link1">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="body_link" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="body_link.urdf">
+        <node name="CR(id)" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="1"/>
+        <edge id="1" from="2" to="-2"/>
+        <edge id="2" from="1" to="base"/>
+        <edge id="3" from="base" to="2"/>
+      </graph>
+    </rule>
+    <rule name="body_link2">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <wnode id="-3"/>
+        <node name="body_link" id="0"/>
+        <node name="connector" id="1"/>
+        <node name="connector" id="2"/>
+        <node name="mount_link" id="3"/>
+        <node name="CR(id)" id="4"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+        <edge id="2" from="0" to="1"/>
+        <edge id="3" from="0" to="2"/>
+        <edge id="4" from="1" to="3"/>
+        <edge id="5" from="2" to="3"/>
+        <edge id="6" from="3" to="4"/>
+        <edge id="7" from="4" to="-3"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="body_link.urdf" id="11"/>
+        <node name="CF(id)" id="12"/>
+        <node name="CRi(id)" id="13"/>
+        <node name="CL(id)" id="14"/>
+
+        <node name="CR(id)" id="20"/>
+        <node name="connector_link.urdf" id="21"/>
+        <node name="CF(id)" id="22"/>
+        <node name="CR(id)" id="23"/>
+        <node name="mount_link.urdf" id="24"/>
+        <node name="CF(id)" id="25"/>
+
+        <node name="CR(id)" id="30"/>
+        <node name="connector_link.urdf" id="31"/>
+        <node name="CF(id)" id="32"/>
+        <node name="CR(id)" id="33"/>
+        <node name="mount_link.urdf" id="34"/>
+        <node name="CF(id)" id="35"/>
+
+        <node name="CR(id)" id="40"/>
+
+        <!-- body_linkコネクタ -->
+        <edge id="11" from="base" to="11"/>
+        <edge id="12" from="11" to="12"/>
+        <edge id="13" from="11" to="13"/>
+        <edge id="14" from="11" to="14"/>
+
+        <!-- 左足組立 -->
+        <edge id="21" from="20" to="21"/>
+        <edge id="22" from="21" to="22"/>
+        <edge id="23" from="22" to="23"/>
+        <edge id="24" from="23" to="24"/>
+        <edge id="25" from="24" to="25"/>
+        <edge id="26" from="25" to="40"/>
+
+        <!-- 右足組立 -->
+        <edge id="31" from="30" to="31"/>
+        <edge id="32" from="31" to="32"/>
+        <edge id="33" from="32" to="33"/>
+        <edge id="34" from="33" to="34"/>
+        <edge id="35" from="34" to="35"/>
+        <edge id="36" from="35" to="40"/>
+
+        <!-- 左足接続 -->
+        <edge id="61" from="14" to="20"/>
+
+        <!-- 右足接続 -->
+        <edge id="71" from="13" to="30"/>
+
+        <!-- ワイルドカード接続 -->
+        <edge id="81" from="-1" to="base"/>
+        <edge id="82" from="12" to="-2"/>
+        <edge id="83" from="40" to="-3"/>
+      </graph>    
+    </rule>
+    <rule name="body_rigid_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="body_rigid_joint" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="body_rigid_joint.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="1" to="2"/>
+        <edge id="3" from="2" to="-2"/>
+      </graph>
+    </rule>
+    <rule name="body_roll_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="body_roll_joint" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="body_roll_joint.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="1" to="2"/>
+        <edge id="3" from="2" to="-2"/>
+      </graph>
+    </rule>
+    <rule name="body_twist_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="body_twist_joint" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="body_twist_joint.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="1" to="2"/>
+        <edge id="3" from="2" to="-2"/>
+      </graph>
+    </rule>
+          
+    <rule name="limb_link10cm">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="limb_link10cm" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="limb_link10cm.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="1" to="2"/>
+        <edge id="3" from="2" to="-2"/>
+      </graph>
+    </rule>
+    <rule name="limb_link15cm">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="limb_link15cm" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="limb_link15cm.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="1" to="2"/>
+        <edge id="3" from="2" to="-2"/>
+      </graph>
+    </rule>
+
+    <rule name="limb_rigid_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="limb_rigid_joint" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="limb_rigid_joint.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="1" to="2"/>
+        <edge id="3" from="2" to="-2"/>
+      </graph>
+    </rule>
+    <rule name="limb_roll_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="limb_roll_joint" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="limb_roll_joint.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="1" to="2"/>
+        <edge id="3" from="2" to="-2"/>
+      </graph>
+    </rule>
+    <rule name="limb_twist_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="limb_twist_joint" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="limb_twist_joint.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="1" to="2"/>
+        <edge id="3" from="2" to="-2"/>
+      </graph>
+    </rule>
+    <rule name="limb_knee_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="limb_knee_joint" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="limb_knee_joint.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="1" to="2"/>
+        <edge id="3" from="2" to="-2"/>
+      </graph>
+    </rule>
+    <rule name="limb_elbow_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="limb_elbow_joint" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="limb_elbow_joint.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="1"/>
+        <edge id="2" from="1" to="2"/>
+        <edge id="3" from="2" to="-2"/>
+      </graph>
+    </rule>
+
+    <rule name="connector_and_mount">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="connector" id="0"/>
+        <node name="mount_link" id="1"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="0" to="1"/>
+        <edge id="2" from="1" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="connector_link.urdf" id="10"/>
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="30"/>
+        <node name="mount_link.urdf" id="40"/>
+        <node name="CF(id)" id="50"/>
+        <edge id="0" from="-1" to="base"/>
+        <edge id="1" from="base" to="10"/>
+        <edge id="2" from="10" to="20"/>
+        <edge id="3" from="20" to="30"/>
+        <edge id="4" from="30" to="40"/>
+        <edge id="5" from="40" to="50"/>
+        <edge id="6" from="50" to="-2"/>
+      </graph>
+    </rule>
+
+    <rule name="root_connector">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <node name="connector" id="0"/>
+        <node name="mount_link" id="1"/>
+        <edge id="0" from="0" to="-1"/>
+        <edge id="1" from="0" to="1"/>
+        <edge id="2" from="1" to="-2"/>
+      </wgraph>
+      <graph base="CR(id)">
+        <node name="connector_link.urdf" id="10"/>
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="30"/>
+        <node name="mount_link.urdf" id="40"/>
+        <node name="CF(id)" id="50"/>
+        <edge id="0" from="base" to="-1"/>
+        <edge id="1" from="base" to="10"/>
+        <edge id="2" from="10" to="20"/>
+        <edge id="3" from="20" to="30"/>
+        <edge id="4" from="30" to="40"/>
+        <edge id="5" from="40" to="50"/>
+        <edge id="6" from="50" to="-2"/>
+      </graph>
+    </rule>
+
+
+
+    <rule name="wheel">
+      <wgraph>
+        <wnode id="-1"/>
+        <node name="wheel" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+      </wgraph>
+      <graph base="wheel.urdf">
+        <node name="CR(id)" id="1"/>
+        <edge id="0" from="-1" to="1"/>
+        <edge id="2" from="1" to="base"/>
+      </graph>
+    </rule>
+    <rule name="inverted_wheel">
+      <wgraph>
+        <wnode id="-1"/>
+        <node name="wheel" id="0"/>
+        <edge id="0" from="0" to="-1"/>
+      </wgraph>
+      <graph base="inverted_wheel_tyre(id)">
+        <node name="inverted_wheel.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="base" to="1"/>
+        <edge id="1" from="1" to="2"/>
+        <edge id="2" from="2" to="-1"/>
+      </graph>
+    </rule> 
+    <rule name="empty">
+      <wgraph>
+        <wnode id="-1"/>
+        <node name="empty" id="0"/>
+        <edge id="0" from="-1" to="0"/>
+      </wgraph>
+      <graph base="empty_edge.urdf">
+        <node name="CR(id)" id="1"/>
+        <edge id="0" from="-1" to="1"/>
+        <edge id="2" from="1" to="base"/>
+      </graph>
+    </rule>
+    <rule name="inverted_empty">
+      <wgraph>
+        <wnode id="-1"/>
+        <node name="empty" id="0"/>
+        <edge id="0" from="0" to="-1"/>
+      </wgraph>
+      <graph base="inverted_empty_edge_ball(id)">
+        <node name="inverted_empty_edge.urdf" id="1"/>
+        <node name="CF(id)" id="2"/>
+        <edge id="0" from="base" to="1"/>
+        <edge id="1" from="1" to="2"/>
+        <edge id="2" from="2" to="-1"/>
+      </graph>
+    </rule> 
+
+    <rule name="untie_wheel">
+      <wgraph>
+        <wnode id="-2"/>
+        <wnode id="-1"/>
+        <node name="CF(id)" id="0"/>
+        <node name="CF(id)" id="1"/>
+        <node name="CR(id)" id="2"/>
+        <node name="wheel.urdf" id="3"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="-2" to="1"/>
+        <edge id="2" from="0" to="2"/>
+        <edge id="3" from="1" to="2"/>
+        <edge id="4" from="2" to="3"/>
+      </wgraph>
+      <graph base="CF(id)">
+        <node name="CR(id)" id="11"/>
+        <node name="wheel.urdf" id="12"/>
+
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="21"/>
+        <node name="wheel.urdf" id="22"/>
+
+        <edge id="10" from="-1" to="base"/>
+        <edge id="11" from="base" to="11"/>
+        <edge id="12" from="11" to="12"/>
+
+        <edge id="20" from="-2" to="20"/>
+        <edge id="21" from="20" to="21"/>
+        <edge id="22" from="21" to="22"/>
+      </graph>
+    </rule>
+
+    <rule name="untie_empty_edge">
+      <wgraph>
+        <wnode id="-2"/>
+        <wnode id="-1"/>
+        <node name="CF(id)" id="0"/>
+        <node name="CF(id)" id="1"/>
+        <node name="CR(id)" id="2"/>
+        <node name="empty_edge.urdf" id="3"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="-2" to="1"/>
+        <edge id="2" from="0" to="2"/>
+        <edge id="3" from="1" to="2"/>
+        <edge id="4" from="2" to="3"/>
+      </wgraph>
+      <graph base="CF(id)">
+        <node name="CR(id)" id="11"/>
+        <node name="empty_edge.urdf" id="12"/>
+
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="21"/>
+        <node name="empty_edge.urdf" id="22"/>
+
+        <edge id="10" from="-1" to="base"/>
+        <edge id="11" from="base" to="11"/>
+        <edge id="12" from="11" to="12"/>
+
+        <edge id="20" from="-2" to="20"/>
+        <edge id="21" from="20" to="21"/>
+        <edge id="22" from="21" to="22"/>
+      </graph>
+    </rule>
+
+    <rule name="untie_limb_link10cm">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <wnode id="-3"/>
+        <node name="CF(id)" id="0"/>
+        <node name="CF(id)" id="1"/>
+        <node name="CR(id)" id="2"/>
+        <node name="limb_link10cm.urdf" id="3"/>
+        <node name="CF(id)" id="4"/>
+        <node name="CR(id)" id="5"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="-2" to="1"/>
+        <edge id="2" from="0" to="2"/>
+        <edge id="3" from="1" to="2"/>
+        <edge id="4" from="2" to="3"/>
+        <edge id="5" from="3" to="4"/>
+        <edge id="6" from="4" to="5"/>
+        <edge id="7" from="5" to="-3"/>
+      </wgraph>
+      <graph base="CF(id)">
+        <node name="CR(id)" id="11"/>
+        <node name="limb_link10cm.urdf" id="12"/>
+        <node name="CF(id)" id="13"/>
+
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="21"/>
+        <node name="limb_link10cm.urdf" id="22"/>
+        <node name="CF(id)" id="23"/>
+
+        <node name="CR(id)" id="30"/>
+
+        <edge id="10" from="-1" to="base"/>
+        <edge id="11" from="base" to="11"/>
+        <edge id="12" from="11" to="12"/>
+        <edge id="13" from="12" to="13"/>
+        <edge id="14" from="13" to="30"/>
+
+        <edge id="20" from="-2" to="20"/>
+        <edge id="21" from="20" to="21"/>
+        <edge id="22" from="21" to="22"/>
+        <edge id="23" from="22" to="23"/>
+        <edge id="24" from="23" to="30"/>
+
+        <edge id="30" from="30" to="-3"/>
+      </graph>
+    </rule>
+    <rule name="untie_limb_link15cm">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <wnode id="-3"/>
+        <node name="CF(id)" id="0"/>
+        <node name="CF(id)" id="1"/>
+        <node name="CR(id)" id="2"/>
+        <node name="limb_link15cm.urdf" id="3"/>
+        <node name="CF(id)" id="4"/>
+        <node name="CR(id)" id="5"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="-2" to="1"/>
+        <edge id="2" from="0" to="2"/>
+        <edge id="3" from="1" to="2"/>
+        <edge id="4" from="2" to="3"/>
+        <edge id="5" from="3" to="4"/>
+        <edge id="6" from="4" to="5"/>
+        <edge id="7" from="5" to="-3"/>
+      </wgraph>
+      <graph base="CF(id)">
+        <node name="CR(id)" id="11"/>
+        <node name="limb_link15cm.urdf" id="12"/>
+        <node name="CF(id)" id="13"/>
+
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="21"/>
+        <node name="limb_link15cm.urdf" id="22"/>
+        <node name="CF(id)" id="23"/>
+
+        <node name="CR(id)" id="30"/>
+
+        <edge id="10" from="-1" to="base"/>
+        <edge id="11" from="base" to="11"/>
+        <edge id="12" from="11" to="12"/>
+        <edge id="13" from="12" to="13"/>
+        <edge id="14" from="13" to="30"/>
+
+        <edge id="20" from="-2" to="20"/>
+        <edge id="21" from="20" to="21"/>
+        <edge id="22" from="21" to="22"/>
+        <edge id="23" from="22" to="23"/>
+        <edge id="24" from="23" to="30"/>
+
+        <edge id="30" from="30" to="-3"/>
+      </graph>
+    </rule>
+    <rule name="untie_limb_rigid_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <wnode id="-3"/>
+        <node name="CF(id)" id="0"/>
+        <node name="CF(id)" id="1"/>
+        <node name="CR(id)" id="2"/>
+        <node name="limb_rigid_joint.urdf" id="3"/>
+        <node name="CF(id)" id="4"/>
+        <node name="CR(id)" id="5"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="-2" to="1"/>
+        <edge id="2" from="0" to="2"/>
+        <edge id="3" from="1" to="2"/>
+        <edge id="4" from="2" to="3"/>
+        <edge id="5" from="3" to="4"/>
+        <edge id="6" from="4" to="5"/>
+        <edge id="7" from="5" to="-3"/>
+      </wgraph>
+      <graph base="CF(id)">
+        <node name="CR(id)" id="11"/>
+        <node name="limb_rigid_joint.urdf" id="12"/>
+        <node name="CF(id)" id="13"/>
+
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="21"/>
+        <node name="limb_rigid_joint.urdf" id="22"/>
+        <node name="CF(id)" id="23"/>
+
+        <node name="CR(id)" id="30"/>
+
+        <edge id="10" from="-1" to="base"/>
+        <edge id="11" from="base" to="11"/>
+        <edge id="12" from="11" to="12"/>
+        <edge id="13" from="12" to="13"/>
+        <edge id="14" from="13" to="30"/>
+
+        <edge id="20" from="-2" to="20"/>
+        <edge id="21" from="20" to="21"/>
+        <edge id="22" from="21" to="22"/>
+        <edge id="23" from="22" to="23"/>
+        <edge id="24" from="23" to="30"/>
+
+        <edge id="30" from="30" to="-3"/>
+      </graph>
+    </rule>
+    <rule name="untie_limb_roll_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <wnode id="-3"/>
+        <node name="CF(id)" id="0"/>
+        <node name="CF(id)" id="1"/>
+        <node name="CR(id)" id="2"/>
+        <node name="limb_roll_joint.urdf" id="3"/>
+        <node name="CF(id)" id="4"/>
+        <node name="CR(id)" id="5"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="-2" to="1"/>
+        <edge id="2" from="0" to="2"/>
+        <edge id="3" from="1" to="2"/>
+        <edge id="4" from="2" to="3"/>
+        <edge id="5" from="3" to="4"/>
+        <edge id="6" from="4" to="5"/>
+        <edge id="7" from="5" to="-3"/>
+      </wgraph>
+      <graph base="CF(id)">
+        <node name="CR(id)" id="11"/>
+        <node name="limb_roll_joint.urdf" id="12"/>
+        <node name="CF(id)" id="13"/>
+
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="21"/>
+        <node name="limb_roll_joint.urdf" id="22"/>
+        <node name="CF(id)" id="23"/>
+
+        <node name="CR(id)" id="30"/>
+
+        <edge id="10" from="-1" to="base"/>
+        <edge id="11" from="base" to="11"/>
+        <edge id="12" from="11" to="12"/>
+        <edge id="13" from="12" to="13"/>
+        <edge id="14" from="13" to="30"/>
+
+        <edge id="20" from="-2" to="20"/>
+        <edge id="21" from="20" to="21"/>
+        <edge id="22" from="21" to="22"/>
+        <edge id="23" from="22" to="23"/>
+        <edge id="24" from="23" to="30"/>
+
+        <edge id="30" from="30" to="-3"/>
+      </graph>
+    </rule>
+    <rule name="untie_limb_twist_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <wnode id="-3"/>
+        <node name="CF(id)" id="0"/>
+        <node name="CF(id)" id="1"/>
+        <node name="CR(id)" id="2"/>
+        <node name="limb_twist_joint.urdf" id="3"/>
+        <node name="CF(id)" id="4"/>
+        <node name="CR(id)" id="5"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="-2" to="1"/>
+        <edge id="2" from="0" to="2"/>
+        <edge id="3" from="1" to="2"/>
+        <edge id="4" from="2" to="3"/>
+        <edge id="5" from="3" to="4"/>
+        <edge id="6" from="4" to="5"/>
+        <edge id="7" from="5" to="-3"/>
+      </wgraph>
+      <graph base="CF(id)">
+        <node name="CR(id)" id="11"/>
+        <node name="limb_twist_joint.urdf" id="12"/>
+        <node name="CF(id)" id="13"/>
+
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="21"/>
+        <node name="limb_twist_joint.urdf" id="22"/>
+        <node name="CF(id)" id="23"/>
+
+        <node name="CR(id)" id="30"/>
+
+        <edge id="10" from="-1" to="base"/>
+        <edge id="11" from="base" to="11"/>
+        <edge id="12" from="11" to="12"/>
+        <edge id="13" from="12" to="13"/>
+        <edge id="14" from="13" to="30"/>
+
+        <edge id="20" from="-2" to="20"/>
+        <edge id="21" from="20" to="21"/>
+        <edge id="22" from="21" to="22"/>
+        <edge id="23" from="22" to="23"/>
+        <edge id="24" from="23" to="30"/>
+
+        <edge id="30" from="30" to="-3"/>
+      </graph>
+    </rule>
+    <rule name="untie_limb_knee_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <wnode id="-3"/>
+        <node name="CF(id)" id="0"/>
+        <node name="CF(id)" id="1"/>
+        <node name="CR(id)" id="2"/>
+        <node name="limb_knee_joint.urdf" id="3"/>
+        <node name="CF(id)" id="4"/>
+        <node name="CR(id)" id="5"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="-2" to="1"/>
+        <edge id="2" from="0" to="2"/>
+        <edge id="3" from="1" to="2"/>
+        <edge id="4" from="2" to="3"/>
+        <edge id="5" from="3" to="4"/>
+        <edge id="6" from="4" to="5"/>
+        <edge id="7" from="5" to="-3"/>
+      </wgraph>
+      <graph base="CF(id)">
+        <node name="CR(id)" id="11"/>
+        <node name="limb_knee_joint.urdf" id="12"/>
+        <node name="CF(id)" id="13"/>
+
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="21"/>
+        <node name="limb_knee_joint.urdf" id="22"/>
+        <node name="CF(id)" id="23"/>
+
+        <node name="CR(id)" id="30"/>
+
+        <edge id="10" from="-1" to="base"/>
+        <edge id="11" from="base" to="11"/>
+        <edge id="12" from="11" to="12"/>
+        <edge id="13" from="12" to="13"/>
+        <edge id="14" from="13" to="30"/>
+
+        <edge id="20" from="-2" to="20"/>
+        <edge id="21" from="20" to="21"/>
+        <edge id="22" from="21" to="22"/>
+        <edge id="23" from="22" to="23"/>
+        <edge id="24" from="23" to="30"/>
+
+        <edge id="30" from="30" to="-3"/>
+      </graph>
+    </rule>
+    <rule name="untie_limb_elbow_joint">
+      <wgraph>
+        <wnode id="-1"/>
+        <wnode id="-2"/>
+        <wnode id="-3"/>
+        <node name="CF(id)" id="0"/>
+        <node name="CF(id)" id="1"/>
+        <node name="CR(id)" id="2"/>
+        <node name="limb_elbow_joint.urdf" id="3"/>
+        <node name="CF(id)" id="4"/>
+        <node name="CR(id)" id="5"/>
+        <edge id="0" from="-1" to="0"/>
+        <edge id="1" from="-2" to="1"/>
+        <edge id="2" from="0" to="2"/>
+        <edge id="3" from="1" to="2"/>
+        <edge id="4" from="2" to="3"/>
+        <edge id="5" from="3" to="4"/>
+        <edge id="6" from="4" to="5"/>
+        <edge id="7" from="5" to="-3"/>
+      </wgraph>
+      <graph base="CF(id)">
+        <node name="CR(id)" id="11"/>
+        <node name="limb_elbow_joint.urdf" id="12"/>
+        <node name="CF(id)" id="13"/>
+
+        <node name="CF(id)" id="20"/>
+        <node name="CR(id)" id="21"/>
+        <node name="limb_elbow_joint.urdf" id="22"/>
+        <node name="CF(id)" id="23"/>
+
+        <node name="CR(id)" id="30"/>
+
+        <edge id="10" from="-1" to="base"/>
+        <edge id="11" from="base" to="11"/>
+        <edge id="12" from="11" to="12"/>
+        <edge id="13" from="12" to="13"/>
+        <edge id="14" from="13" to="30"/>
+
+        <edge id="20" from="-2" to="20"/>
+        <edge id="21" from="20" to="21"/>
+        <edge id="22" from="21" to="22"/>
+        <edge id="23" from="22" to="23"/>
+        <edge id="24" from="23" to="30"/>
+
+        <edge id="30" from="30" to="-3"/>
+      </graph>
+    </rule>
+  </production-rule>
+</grammar>
+
