@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<robot name="body_twist_joint_link">
+  <!-- FOR CONVENTIONAL URDF DESCRIPTION -->
+  <link name="base_link"/>
+  <joint name="body_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="CR(id)"/>
+  </joint>
+
+  <!-- Module structure description -->
+  <!-- Each link and joint must have "(id)" in the name-->
+  <!-- PYTHON_READ_START -->
+
+  <!-- Rear body_twist_joint -->
+  <link name="CR(id)">
+    <!-- Only visual, No collision -->
+    <visual>
+      <geometry>
+        <cylinder length="0.01" radius="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 2.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- body -->
+  <joint name="body_twist_joint(id)" type="revolute">
+    <parent link="CR(id)"/>
+    <child link="body_twist_joint_cap(id)"/>
+    <origin xyz="-0.05 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-3.14159" upper="3.14159" effort="0" velocity="0"/>
+  </joint>
+  <link name="body_twist_joint_cap(id)">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry> 
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <material name="body_twist_joint_color">
+        <color rgba="0.0 1.0 0.5 2.0"/>
+      </material>
+    </visual>
+  </link>
+ 
+  <!-- Front body_twist_joint -->
+  <joint name="body_twist_joint_link_BD2CF(id)" type="fixed">
+    <parent link="body_twist_joint_cap(id)"/>
+    <child link="CF(id)"/>
+    <origin xyz="-0.05 0 0" rpy="0 0 3.14159"/>
+  </joint>
+  <link name="CF(id)">
+    <!-- Only visual, No collision -->
+    <visual>
+      <geometry>
+        <cylinder length="0.01" radius="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 2.0"/>
+      </material>
+    </visual>
+  </link>
+  <!-- PYTHON_READ_END -->
+  
+</robot>
