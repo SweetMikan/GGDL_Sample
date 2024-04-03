@@ -7,8 +7,8 @@ The construction rule for robots is based on Robogrammar [1].
 The GGDL expression of Robogrammar is placed at `sample/robogrammar.gramar`.
  
 ## Requirement
-*NetworkX 3.1~
-*Matplotlib 3.7.4~
+* NetworkX 3.1~
+* Matplotlib 3.7.4~
 
 ## Usage
 Call `create_robot.sh` at the `sample` directory.
@@ -16,6 +16,8 @@ The URDF file of the generated robot is placed at `sample/generated_robots` as `
 
 If ROS is available, `view_urdf.sh` launches rviz and shows the content of a URDF file.
 ### Example
+`sh create_robot.sh`
+
 `sh view_urdf.sh path/to/a/urdf/file.urdf`
 
 ## Reference
