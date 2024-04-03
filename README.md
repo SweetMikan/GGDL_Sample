@@ -1,6 +1,6 @@
 # GGDL sample program
-GGDL (Graph Grammar Definition Language; under development) is an XML-based language to describe a graph grammar.
-GGDL aims to be a unified description format for graph grammars.
+GGDL (Graph Grammar Definition Language) is an XML-based language to describe a graph grammar.
+GGDL aims to be a unified description format for graph grammars and the preparation of the specification document is in progress.
 
 This sample program generates URDF files of randomly constructed robots.
 The construction rule for robots is based on Robogrammar [1].
