@@ -4,7 +4,7 @@ GGDL aims to be a unified description format for graph grammars.
 
 This sample program generates URDF files of randomly constructed robots.
 The construction rule for robots is based on Robogrammar [1].
-The GGDL expression of Robogrammar is placed at `sample/robogrammar.gramar`.
+The GGDL expression of Robogrammar is placed at `sample/RoboGrammar.grammar`.
  
 ## Requirement
 * NetworkX 3.1~
